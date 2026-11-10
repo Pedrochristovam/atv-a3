@@ -1,0 +1,38 @@
+﻿[
+    {
+        "dest":  "italia-coliseu.jpg",
+        "url":  "https://live.staticflickr.com/3843/15126580060_16fa4f4389_b.jpg",
+        "title":  "Colosseum, Rome",
+        "foreign":  "https://www.flickr.com/photos/28792061@N05/15126580060"
+    },
+    {
+        "dest":  "eua-liberdade.jpg",
+        "url":  "https://live.staticflickr.com/4846/44200359520_d6b82dd6a9_b.jpg",
+        "title":  "Statue of Liberty, New York",
+        "foreign":  "https://www.flickr.com/photos/43355249@N00/44200359520"
+    },
+    {
+        "dest":  "japao-fuji.jpg",
+        "url":  "https://live.staticflickr.com/3353/3598596327_5e36745295_b.jpg",
+        "title":  "Painting - Mount Fuji, Japan",
+        "foreign":  "https://www.flickr.com/photos/31290768@N06/3598596327"
+    },
+    {
+        "dest":  "brasil-cristo.jpg",
+        "url":  "https://live.staticflickr.com/3825/11751292953_66dc3fa4aa_b.jpg",
+        "title":  "View from Christ the Redeemer - Rio de Janeiro, August 2013",
+        "foreign":  "https://www.flickr.com/photos/39641067@N00/11751292953"
+    },
+    {
+        "dest":  "mexico-chichen.jpg",
+        "url":  "https://live.staticflickr.com/2322/2447195100_7b05007b4b_b.jpg",
+        "title":  "Chichen Itza Mexico, Mayan Ruins",
+        "foreign":  "https://www.flickr.com/photos/16894864@N05/2447195100"
+    },
+    {
+        "dest":  "australia-opera.jpg",
+        "url":  "https://live.staticflickr.com/50/114538159_cb64552e0d_b.jpg",
+        "title":  "Sydney opera house",
+        "foreign":  "https://www.flickr.com/photos/50216172@N00/114538159"
+    }
+]

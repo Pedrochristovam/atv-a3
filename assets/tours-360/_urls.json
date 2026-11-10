@@ -1,0 +1,42 @@
+﻿[
+    {
+        "Title":  "File:Pont de Bir-Hakeim and the Eiffel Tower, April 2007.jpg",
+        "Url":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Pont_de_Bir-Hakeim_and_the_Eiffel_Tower%2C_April_2007.jpg/3840px-Pont_de_Bir-Hakeim_and_the_Eiffel_Tower%2C_April_2007.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+        "Width":  2048,
+        "Height":  1024,
+        "Mime":  "image/jpeg",
+        "Dest":  "franca-eiffel.jpg"
+    },
+    {
+        "Title":  "File:Taj Mahal 360° View.jpg",
+        "Url":  "https://upload.wikimedia.org/wikipedia/commons/f/fb/Taj_Mahal_360%C2%B0_View.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail_unscaled",
+        "Width":  2048,
+        "Height":  1024,
+        "Mime":  "image/jpeg",
+        "Dest":  "india-taj.jpg"
+    },
+    {
+        "Title":  "File:Giza pyramid complex - 360.jpg",
+        "Url":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Giza_pyramid_complex_-_360.jpg/3840px-Giza_pyramid_complex_-_360.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+        "Width":  2048,
+        "Height":  353,
+        "Mime":  "image/jpeg",
+        "Dest":  "egito-piramides.jpg"
+    },
+    {
+        "Title":  "File:Statue of Liberty NY.jpg",
+        "Url":  "https://upload.wikimedia.org/wikipedia/commons/c/c8/Statue_of_Liberty_NY.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail_unscaled",
+        "Width":  2048,
+        "Height":  2941,
+        "Mime":  "image/jpeg",
+        "Dest":  "eua-liberdade.jpg"
+    },
+    {
+        "Title":  "File:Colosseum in Rome, Italy - April 2007.jpg",
+        "Url":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/3840px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+        "Width":  2048,
+        "Height":  1202,
+        "Mime":  "image/jpeg",
+        "Dest":  "italia-coliseu.jpg"
+    }
+]

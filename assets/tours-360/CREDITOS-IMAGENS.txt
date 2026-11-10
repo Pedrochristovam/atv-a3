@@ -1,0 +1,5 @@
+﻿Novos 12 paises (bandeiras com cores vivas, sem branco dominante):
+Brasil, Alemanha, Espanha, Portugal, China, Colombia, Africa do Sul,
+Jamaica, Suecia, Vietna, Gana, Marrocos.
+
+Imagens de destino via Wikipedia/Wikimedia Commons (API summary).

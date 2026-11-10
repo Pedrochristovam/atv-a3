@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atlas AR — Bandeiras e Tours 360°</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/estilos-interface.css" />
+    <!-- A-Frame: Realidade Virtual / cena 360° -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <!-- OpenCV.js (C++/WebAssembly): reforço de visão computacional no reconhecimento -->
+    <script>
+      var Module = {
+        onRuntimeInitialized: function () {
+          if (window.ReconhecerBandeiraOpenCv) {
+            window.ReconhecerBandeiraOpenCv.marcarPronto();
+          }
+        }
+      };
+    </script>
+    <script async src="https://docs.opencv.org/4.10.0/opencv.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <section id="tela-inicio" class="tela tela-inicio">
+        <div class="hero">
+          <p class="selo">Realidade aumentada · turismo</p>
+          <h1 class="marca">Atlas <em>AR</em></h1>
+          <p class="subtitulo">
+            Identifique a bandeira de um país e viaje ao seu principal ponto
+            turístico em realidade virtual 360°.
+          </p>
+          <div class="acoes">
+            <button id="btn-ir-album" class="botao botao-principal" type="button">
+              Explorar álbum
+            </button>
+            <button id="btn-ir-camera" class="botao botao-secundario" type="button">
+              Escanear bandeira (AR)
+            </button>
+          </div>
+          <ol class="passos">
+            <li><span class="num">01</span> Escolha um país no álbum ou escaneie a bandeira.</li>
+            <li><span class="num">02</span> O painel 3D A-Frame aparece em Realidade Aumentada.</li>
+            <li><span class="num">03</span> Visite o destino em Realidade Virtual 360°.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="tela-album" class="tela oculto">
+        <div class="cabecalho-tela">
+          <div>
+            <h2>Álbum de bandeiras</h2>
+            <p>Doze destinos. Escolha um país para abrir o tour.</p>
+          </div>
+          <button id="btn-album-voltar" class="botao botao-voltar" type="button">
+            Voltar
+          </button>
+        </div>
+        <div id="grade-bandeiras" class="grade-bandeiras"></div>
+      </section>
+
+      <section id="tela-camera" class="tela tela-camera oculto">
+        <!-- Camada 1: webcam (mundo real) -->
+        <video id="video-camera" class="video-camera" playsinline autoplay muted></video>
+        <canvas id="canvas-analise" class="oculto" width="240" height="160"></canvas>
+
+        <!-- Camada 2: Realidade Aumentada com componentes A-Frame -->
+        <div id="container-cena-ar" class="container-cena-ar" aria-label="Cena de Realidade Aumentada A-Frame"></div>
+
+        <div class="mira" aria-hidden="true"></div>
+
+        <div class="barra-camera">
+          <button id="btn-camera-voltar" class="botao botao-voltar" type="button">
+            Voltar
+          </button>
+          <div id="status-deteccao" class="status-deteccao">Iniciando...</div>
+        </div>
+
+        <div class="rodape-camera">
+          <button id="btn-visitar-ar-html" class="botao botao-visitar-ar oculto" type="button">
+            Visitar destino 360°
+          </button>
+          <div class="acoes-camera">
+            <button id="btn-capturar-frame" class="botao botao-principal" type="button">
+              Capturar
+            </button>
+            <label class="botao botao-secundario" for="input-foto-bandeira">
+              Enviar foto
+            </label>
+            <button id="btn-limpar-deteccao" class="botao botao-fantasma" type="button">
+              Limpar
+            </button>
+            <input id="input-foto-bandeira" type="file" accept="image/*" capture="environment" class="oculto" />
+          </div>
+          <p class="dica-atalhos">Toque em Capturar ou escolha uma bandeira</p>
+          <div id="atalhos-bandeiras-camera" class="atalhos-bandeiras-camera"></div>
+        </div>
+      </section>
+
+      <section id="tela-tour" class="tela tela-tour oculto">
+        <div class="overlay-tour">
+          <div class="info-tour">
+            <h2 id="tour-titulo">Destino</h2>
+            <p id="tour-descricao">Descrição</p>
+          </div>
+          <button id="btn-tour-voltar" class="botao botao-voltar" type="button">
+            Sair do tour
+          </button>
+        </div>
+        <div id="container-cena-360"></div>
+        <div class="dica-tour">Arraste para olhar ao redor · gire o celular se estiver no mobile</div>
+      </section>
+    </div>
+
+    <!-- Painel de detalhe do álbum -->
+    <div id="painel-detalhe" class="painel-detalhe oculto" role="dialog" aria-modal="true">
+      <div class="painel-detalhe-conteudo">
+        <div class="painel-detalhe-topo">
+          <img id="detalhe-bandeira" src="" alt="" />
+          <div>
+            <h3 id="detalhe-nome">País</h3>
+            <p id="detalhe-capital">Capital</p>
+          </div>
+        </div>
+        <p id="detalhe-destino" class="destino-texto"></p>
+        <div class="painel-acoes">
+          <button id="btn-detalhe-fechar" class="botao botao-secundario" type="button">
+            Fechar
+          </button>
+          <button id="btn-detalhe-visitar" class="botao botao-principal" type="button">
+            Visitar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/dados-paises.js"></script>
+    <script src="js/utilitarios-interface.js"></script>
+    <script src="js/classificar-bandeira-por-padrao.js"></script>
+    <script src="js/consultar-reconhecimento-python.js"></script>
+    <script src="js/reconhecer-bandeira.js"></script>
+    <script src="js/reconhecer-bandeira-opencv.js"></script>
+    <script src="js/montar-cena-ar-aframe.js"></script>
+    <script src="js/mostrar-card-pais-ar.js"></script>
+    <script src="js/iniciar-camera-ar.js"></script>
+    <script src="js/abrir-tour-360.js"></script>
+    <script src="js/controlar-navegacao.js"></script>
+    <script src="js/iniciar-aplicacao.js"></script>
+  </body>
+</html>

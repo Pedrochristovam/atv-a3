@@ -1,0 +1,25 @@
+Atlas AR — como rodar a demo
+============================
+
+1) Servidor do site (obrigatório)
+   Na pasta do projeto:
+     npx --yes serve . -l 3456
+   Abra: http://localhost:3456
+
+2) Servidor de reconhecimento Python + OpenCV (recomendado — bem mais preciso)
+   Em outro terminal:
+     cd servidor-reconhecimento
+     pip install -r requirements.txt
+     python reconhecer_bandeira_opencv.py
+
+   Ele sobe em http://127.0.0.1:5055
+   Se não estiver ligado, o sistema ainda funciona com o classificador JS por padrão.
+
+3) Fluxos na apresentação
+   - Álbum → país → Visitar → tour 360° (sempre funciona)
+   - Escanear → Capturar (com a bandeira na mira) → Visitar
+   - Escanear → toque numa bandeira embaixo → Visitar (demo garantida)
+
+Dica:
+   Mostre a bandeira GRANDE e nítida na mira, depois toque em Capturar.
+   Não confie no reconhecimento “ao vivo” automático (ele só dá dica).

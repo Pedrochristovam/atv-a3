@@ -1,0 +1,4 @@
+﻿# Tours 360
+Imagens equiretangulares (2:1) para o A-Frame.
+Atuais: placeholders coloridos para a demo funcionar.
+Substitua por panoramas reais mantendo o nome do arquivo.

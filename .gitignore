@@ -1,0 +1,51 @@
+# Ambientes virtuais Python
+.venv/
+venv/
+ENV/
+
+# Cache e bytecode Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Ferramentas / caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Variáveis de ambiente e segredos locais
+.env
+.env.*
+!.env.example
+
+# Logs e temporários
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDEs / editores
+.idea/
+.vscode/
+*.code-workspace
+
+# Coverage / testes
+htmlcov/
+.coverage
+coverage.xml
+
+# Node (caso seja adicionado no futuro)
+node_modules/
+npm-debug.log*
+yarn-error.log*

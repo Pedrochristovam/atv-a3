@@ -1,0 +1,9 @@
+Pasta reservada para alvos de rastreamento MindAR (.mind) no futuro.
+
+No MVP atual o reconhecimento usa assinatura de cores (js/reconhecer-bandeira.js),
+sem precisar compilar alvos.
+
+Se o grupo quiser evoluir para MindAR:
+1. Compilar as imagens de assets/bandeiras no compilador MindAR
+2. Salvar o arquivo .mind nesta pasta
+3. Adaptar iniciar-camera-ar.js para usar o rastreamento MindAR
