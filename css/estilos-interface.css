@@ -415,6 +415,75 @@ body::before {
   z-index: 2;
 }
 
+/* Painel informativo MindAR (Brasil) — canto inferior, não cobre o modelo */
+.painel-ar-brasil {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: max(0.9rem, env(safe-area-inset-bottom));
+  z-index: 9;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 0.85rem 0.95rem 0.95rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--linha);
+  box-shadow: var(--sombra-leve);
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+}
+
+.painel-ar-pais {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.painel-ar-titulo {
+  margin: 0.2rem 0 0;
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.15rem, 4.2vw, 1.4rem);
+  font-weight: 600;
+  color: var(--tinta);
+  line-height: 1.15;
+}
+
+.painel-ar-local {
+  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  color: var(--tinta-suave, #5c6672);
+}
+
+.painel-ar-texto {
+  margin: 0.55rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--tinta);
+}
+
+.botao-conhecer-ar {
+  width: 100%;
+  margin-top: 0.75rem;
+  background: var(--accent);
+  color: #fff;
+}
+
+.tela-camera-mindar .painel-ar-brasil.oculto {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .painel-ar-brasil {
+    left: auto;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    margin: 0;
+  }
+}
+
 .container-cena-ar a-scene {
   width: 100% !important;
   height: 100% !important;

@@ -25,10 +25,21 @@
 
 window.MontarCenaMindarAr = (function () {
   var CAMINHO_TARGET = "assets/targets/brasil.mind";
+  var CAMINHO_MODELO_CRISTO = "assets/modelos/cristo-redentor.glb";
   var CONTAINER_ID = "container-cena-ar";
   var STATUS_ID = "status-deteccao";
+  var PAINEL_AR_ID = "painel-ar-brasil";
+  var BTN_CONHECER_ID = "btn-conhecer-brasil-ar";
   var VIDEO_LEGADO_ID = "video-camera";
   var TIMEOUT_AR_READY_MS = 20000;
+  /**
+   * Pose do Cristo no target MindAR (plano da bandeira = XY, +Z sai em direção à câmera).
+   * GLB (após matriz Sketchfab): altura local = +Y, frente ≈ +Z.
+   * rotation="-90 0 0" alinha o +Y do modelo ao +Z do target (em pé, saindo da bandeira).
+   */
+  var ESCALA_CRISTO = "0.22 0.22 0.22";
+  var POSICAO_CRISTO = "0 0 0.02";
+  var ROTACAO_CRISTO = "90 0 0";
 
   var ESTADO = {
     INATIVO: "inativo",
@@ -187,6 +198,12 @@ window.MontarCenaMindarAr = (function () {
         CAMINHO_TARGET +
         "; maxTrack: 1; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes\"",
       ">",
+      '  <a-assets timeout="30000">',
+      '    <a-asset-item id="asset-cristo-redentor" src="' +
+        CAMINHO_MODELO_CRISTO +
+        '"></a-asset-item>',
+      "  </a-assets>",
+      "",
       '  <a-camera id="camera-mindar-ar"',
       '    position="0 0 0"',
       '    look-controls="enabled: false"',
@@ -194,35 +211,83 @@ window.MontarCenaMindarAr = (function () {
       "  ></a-camera>",
       "",
       '  <a-entity id="alvo-brasil-mindar" mindar-image-target="targetIndex: 0">',
-      '    <a-entity id="objeto-brasil-mindar" position="0 0.35 0">',
-      '      <a-box',
-      '        width="0.35" height="0.35" depth="0.35"',
-      '        position="0 0.2 0"',
-      '        color="#009c3b"',
-      '        animation="property: rotation; to: 0 360 0; loop: true; dur: 5000; easing: linear"',
-      "      ></a-box>",
-      '      <a-sphere',
-      '        radius="0.1"',
-      '        position="0 0.55 0"',
-      '        color="#ffdf00"',
-      '        animation="property: position; to: 0 0.62 0; dir: alternate; loop: true; dur: 1200; easing: easeInOutSine"',
-      "      ></a-sphere>",
-      '      <a-cylinder',
-      '        radius="0.04" height="0.55"',
-      '        position="0 -0.05 0"',
-      '        color="#002776"',
-      "      ></a-cylinder>",
-      '      <a-text',
-      '        value="Brasil"',
-      '        align="center"',
-      '        color="#ffffff"',
-      '        width="2.4"',
-      '        position="0 0.85 0"',
-      "      ></a-text>",
-      "    </a-entity>",
+      '    <a-gltf-model id="modelo-cristo-ar"',
+      '      src="#asset-cristo-redentor"',
+      '      position="' +
+        POSICAO_CRISTO +
+        '"',
+      '      rotation="' +
+        ROTACAO_CRISTO +
+        '"',
+      '      scale="0.001 0.001 0.001"',
+      '      animation__entrada="property: scale; to: ' +
+        ESCALA_CRISTO +
+        '; dur: 750; easing: easeOutCubic; startEvents: cristo-aparecer">',
+      "    </a-gltf-model>",
       "  </a-entity>",
       "</a-scene>"
     ].join("\n");
+  }
+
+  function painelAr() {
+    return document.getElementById(PAINEL_AR_ID);
+  }
+
+  function mostrarPainelBrasil() {
+    var painel = painelAr();
+    if (painel) {
+      painel.classList.remove("oculto");
+    }
+  }
+
+  function esconderPainelBrasil() {
+    var painel = painelAr();
+    if (painel) {
+      painel.classList.add("oculto");
+    }
+  }
+
+  function animarEntradaCristo() {
+    var modelo = document.getElementById("modelo-cristo-ar");
+    if (!modelo) {
+      return;
+    }
+    modelo.setAttribute("scale", "0.001 0.001 0.001");
+    // Reinicia a animação de entrada a cada targetFound.
+    modelo.emit("cristo-aparecer");
+  }
+
+  function visitarTourBrasil() {
+    var pais =
+      typeof window.buscarPaisPorId === "function"
+        ? window.buscarPaisPorId("brasil")
+        : null;
+
+    if (!pais) {
+      atualizarStatus("Não foi possível abrir o tour do Brasil.");
+      return;
+    }
+
+    if (window.ControlarNavegacao && typeof window.ControlarNavegacao.irParaTour === "function") {
+      // irParaTour já encerra o scanner MindAR e libera a câmera.
+      window.ControlarNavegacao.irParaTour(pais);
+      return;
+    }
+
+    atualizarStatus("Navegação para o tour indisponível.");
+  }
+
+  function ligarBotaoConhecer() {
+    var botao = document.getElementById(BTN_CONHECER_ID);
+    if (!botao || botao.dataset.mindarLigado === "1") {
+      return;
+    }
+    botao.dataset.mindarLigado = "1";
+    botao.addEventListener("click", function (evento) {
+      evento.preventDefault();
+      evento.stopPropagation();
+      visitarTourBrasil();
+    });
   }
 
   function obterSistemaMindAr() {
@@ -477,6 +542,7 @@ window.MontarCenaMindarAr = (function () {
     alvo = null;
     bandeiraVisivel = false;
     estado = ESTADO.INATIVO;
+    esconderPainelBrasil();
 
     if (opcoes.restaurarVideo !== false) {
       restaurarVideoLegado();
@@ -556,6 +622,8 @@ window.MontarCenaMindarAr = (function () {
       }
 
       bandeiraVisivel = true;
+      animarEntradaCristo();
+      mostrarPainelBrasil();
       atualizarStatus("Bandeira do Brasil detectada.");
       emitir("onTargetFound", { paisId: "brasil", targetIndex: 0 });
     };
@@ -569,6 +637,7 @@ window.MontarCenaMindarAr = (function () {
       }
 
       bandeiraVisivel = false;
+      esconderPainelBrasil();
       atualizarStatus("Bandeira perdida. Centralize a bandeira do Brasil novamente.");
       emitir("onTargetLost", { paisId: "brasil", targetIndex: 0 });
     };
@@ -705,6 +774,8 @@ window.MontarCenaMindarAr = (function () {
 
       ligarListenersCena(geracaoSessao);
       ligarListenersPagina();
+      ligarBotaoConhecer();
+      esconderPainelBrasil();
       agendarTimeoutReady(geracaoSessao);
       atualizarStatus("Solicitando câmera traseira e carregando target...");
 

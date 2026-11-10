@@ -99,7 +99,7 @@ window.ControlarNavegacao = (function () {
       onTargetFound: function () {
         window.UtilitariosInterface.definirTexto(
           "status-deteccao",
-          "Bandeira do Brasil detectada."
+          "Bandeira do Brasil detectada · Cristo Redentor"
         );
       },
       onTargetLost: function () {
