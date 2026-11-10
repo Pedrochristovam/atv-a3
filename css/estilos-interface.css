@@ -388,11 +388,31 @@ body::before {
   filter: contrast(1.08) saturate(1.05);
 }
 
+/* Modo MindAR: esconde UI/câmera legadas e eleva o vídeo injetado pelo MindAR
+   (a lib usa z-index:-2, que ficaria atrás do fundo opaco de .tela-camera). */
+.tela-camera-mindar {
+  background: #000;
+}
+
+.tela-camera-mindar #video-camera,
+.tela-camera-mindar .mira-legado,
+.tela-camera-mindar .rodape-camera-legado {
+  display: none !important;
+}
+
+.tela-camera-mindar > video:not(#video-camera) {
+  z-index: 1 !important;
+}
+
 .container-cena-ar {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
+}
+
+.tela-camera-mindar .container-cena-ar {
+  z-index: 2;
 }
 
 .container-cena-ar a-scene {

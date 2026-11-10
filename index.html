@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/estilos-interface.css" />
     <!-- A-Frame: Realidade Virtual / cena 360° -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <!-- MindAR 1.2.5: image tracking (depois do A-Frame) -->
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <!-- OpenCV.js (C++/WebAssembly): reforço de visão computacional no reconhecimento -->
     <script>
       var Module = {
@@ -65,14 +67,14 @@
       </section>
 
       <section id="tela-camera" class="tela tela-camera oculto">
-        <!-- Camada 1: webcam (mundo real) -->
+        <!-- Camada legada (fluxo antigo IniciarCameraAr; oculta no modo MindAR) -->
         <video id="video-camera" class="video-camera" playsinline autoplay muted></video>
         <canvas id="canvas-analise" class="oculto" width="240" height="160"></canvas>
 
-        <!-- Camada 2: Realidade Aumentada com componentes A-Frame -->
-        <div id="container-cena-ar" class="container-cena-ar" aria-label="Cena de Realidade Aumentada A-Frame"></div>
+        <!-- Cena AR: MindAR injeta tracking + objeto 3D ancorado -->
+        <div id="container-cena-ar" class="container-cena-ar" aria-label="Cena de Realidade Aumentada MindAR"></div>
 
-        <div class="mira" aria-hidden="true"></div>
+        <div class="mira mira-legado" aria-hidden="true"></div>
 
         <div class="barra-camera">
           <button id="btn-camera-voltar" class="botao botao-voltar" type="button">
@@ -81,7 +83,7 @@
           <div id="status-deteccao" class="status-deteccao">Iniciando...</div>
         </div>
 
-        <div class="rodape-camera">
+        <div class="rodape-camera rodape-camera-legado">
           <button id="btn-visitar-ar-html" class="botao botao-visitar-ar oculto" type="button">
             Visitar destino 360°
           </button>
@@ -148,6 +150,7 @@
     <script src="js/montar-cena-ar-aframe.js"></script>
     <script src="js/mostrar-card-pais-ar.js"></script>
     <script src="js/iniciar-camera-ar.js"></script>
+    <script src="js/montar-cena-mindar-ar.js"></script>
     <script src="js/abrir-tour-360.js"></script>
     <script src="js/controlar-navegacao.js"></script>
     <script src="js/iniciar-aplicacao.js"></script>
