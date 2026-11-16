@@ -55,8 +55,17 @@ window.ControlarNavegacao = (function () {
     if (window.AbrirTour360 && window.AbrirTour360.fechar) {
       window.AbrirTour360.fechar();
     }
-    window.UtilitariosInterface.mostrarTela("tela-album");
-    window.IniciarAplicacao.preencherAlbum();
+    // Landing unificada: álbum vive na tela inicial.
+    window.UtilitariosInterface.mostrarTela("tela-inicio");
+    if (window.IniciarAplicacao && window.IniciarAplicacao.preencherAlbum) {
+      window.IniciarAplicacao.preencherAlbum();
+    }
+    setTimeout(function () {
+      var secao = document.getElementById("secao-album");
+      if (secao) {
+        secao.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 60);
   }
 
   function irParaCamera() {

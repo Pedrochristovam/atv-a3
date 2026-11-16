@@ -12,8 +12,13 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/brasil.png",
     pontoTuristico: "Cristo Redentor",
     cidade: "Rio de Janeiro",
+    continente: "americas",
+    regiao: "América do Sul",
+    etiqueta: "Maravilha Mundial",
     descricao: "Monumento no Corcovado, um dos símbolos mais reconhecidos do Brasil.",
-    arquivoTour360: "assets/tours-360/brasil-cristo.jpg",
+    arquivoTour360: "assets/tours-360/brasil-rio-panorama.jpg",
+    tipoTour: "cilindrico",
+    arAtivo: true,
     corDestaque: "#009c3b"
   },
   {
@@ -24,8 +29,13 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/alemanha.png",
     pontoTuristico: "Portão de Brandemburgo",
     cidade: "Berlim",
+    continente: "europa",
+    regiao: "Europa",
+    etiqueta: "Histórico",
     descricao: "Monumento neoclássico e marco histórico da capital alemã.",
     arquivoTour360: "assets/tours-360/alemanha-brandemburgo.jpg",
+    arquivoModelo: "assets/modelos/brandenburg-gate.glb",
+    tipoTour: "modelo3d",
     corDestaque: "#dd0000"
   },
   {
@@ -36,8 +46,13 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/espanha.png",
     pontoTuristico: "Sagrada Família",
     cidade: "Barcelona",
+    continente: "europa",
+    regiao: "Europa",
+    etiqueta: "Patrimônio UNESCO",
     descricao: "Basílica de Gaudí, ícone de Barcelona.",
     arquivoTour360: "assets/tours-360/espanha-sagrada.jpg",
+    arquivoModelo: "assets/modelos/sagrada-familia.glb",
+    tipoTour: "modelo3d",
     corDestaque: "#aa151b"
   },
   {
@@ -48,8 +63,13 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/portugal.png",
     pontoTuristico: "Torre de Belém",
     cidade: "Lisboa",
+    continente: "europa",
+    regiao: "Europa",
+    etiqueta: "Náutico",
     descricao: "Torre manuelina à beira do Tejo, patrimônio da UNESCO.",
     arquivoTour360: "assets/tours-360/portugal-belem.jpg",
+    arquivoModelo: "assets/modelos/torre-belem.glb",
+    tipoTour: "modelo3d",
     corDestaque: "#006600"
   },
   {
@@ -60,8 +80,14 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/china.png",
     pontoTuristico: "Grande Muralha",
     cidade: "Pequim (região)",
+    continente: "asia-africa",
+    regiao: "Ásia",
+    etiqueta: "Patrimônio UNESCO",
     descricao: "Fortificação histórica que atravessa o norte da China.",
     arquivoTour360: "assets/tours-360/china-muralha.jpg",
+    arquivoModelo: "assets/modelos/great-wall.glb",
+    arquivoTexturaModelo: "assets/modelos/great-wall-stone.jpg",
+    tipoTour: "modelo3d",
     corDestaque: "#de2910"
   },
   {
@@ -72,6 +98,9 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/colombia.png",
     pontoTuristico: "Cidade amuralhada de Cartagena",
     cidade: "Cartagena",
+    continente: "americas",
+    regiao: "América do Sul",
+    etiqueta: "Colonial",
     descricao: "Centro histórico colonial colorido à beira do Caribe.",
     arquivoTour360: "assets/tours-360/colombia-cartagena.jpg",
     corDestaque: "#fcd116"
@@ -84,6 +113,9 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/africa-do-sul.png",
     pontoTuristico: "Montanha da Mesa",
     cidade: "Cidade do Cabo",
+    continente: "asia-africa",
+    regiao: "África",
+    etiqueta: "Natureza",
     descricao: "Montanha icônica com vista para a Cidade do Cabo.",
     arquivoTour360: "assets/tours-360/africa-do-sul-mesa.jpg",
     corDestaque: "#007a4d"
@@ -96,6 +128,9 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/jamaica.png",
     pontoTuristico: "Cataratas de Dunn's River",
     cidade: "Ocho Rios",
+    continente: "americas",
+    regiao: "Caribe",
+    etiqueta: "Natureza",
     descricao: "Quedas d'água em terraços de calcário, clássico do turismo jamaicano.",
     arquivoTour360: "assets/tours-360/jamaica-dunn.jpg",
     corDestaque: "#009b3a"
@@ -108,6 +143,9 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/suecia.png",
     pontoTuristico: "Gamla Stan",
     cidade: "Estocolmo",
+    continente: "europa",
+    regiao: "Europa",
+    etiqueta: "Histórico",
     descricao: "Cidade antiga de Estocolmo, com praças e ruas históricas.",
     arquivoTour360: "assets/tours-360/suecia-gamla.jpg",
     corDestaque: "#006aa7"
@@ -120,6 +158,9 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/vietnam.png",
     pontoTuristico: "Baía de Ha Long",
     cidade: "Quảng Ninh",
+    continente: "asia-africa",
+    regiao: "Ásia",
+    etiqueta: "Patrimônio UNESCO",
     descricao: "Baía com milhares de ilhotas de calcário, patrimônio mundial.",
     arquivoTour360: "assets/tours-360/vietnam-halong.jpg",
     corDestaque: "#da251d"
@@ -132,6 +173,9 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/gana.png",
     pontoTuristico: "Independence Arch",
     cidade: "Acra",
+    continente: "asia-africa",
+    regiao: "África",
+    etiqueta: "Histórico",
     descricao: "Arco da Independência, marco da capital de Gana.",
     arquivoTour360: "assets/tours-360/gana-arco.jpg",
     corDestaque: "#006b3f"
@@ -144,6 +188,9 @@ window.DADOS_PAISES = [
     arquivoBandeira: "assets/bandeiras/armenia.png",
     pontoTuristico: "Praça da República",
     cidade: "Yerevan",
+    continente: "europa",
+    regiao: "Europa / Cáucaso",
+    etiqueta: "Arquitetura",
     descricao: "Centro monumental da capital armênia, com arquitetura rosada típica.",
     arquivoTour360: "assets/tours-360/armenia-yerevan.jpg",
     corDestaque: "#d90012"

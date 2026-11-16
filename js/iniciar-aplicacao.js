@@ -5,6 +5,8 @@
 
 window.IniciarAplicacao = (function () {
   var paisSelecionado = null;
+  var filtroAtivo = "todos";
+  var termoBusca = "";
 
   function elementosDetalhe() {
     return {
@@ -37,28 +39,73 @@ window.IniciarAplicacao = (function () {
     paisSelecionado = null;
   }
 
+  function badgeDoPais(pais) {
+    if (pais.arAtivo) {
+      return '<span class="badge-ar">AR ativo</span>';
+    }
+    if (pais.tipoTour === "modelo3d") {
+      return '<span class="badge-3d">3D</span>';
+    }
+    return '<span class="badge-tour">Tour</span>';
+  }
+
+  function ctaDoPais(pais) {
+    if (pais.arAtivo || pais.tipoTour === "modelo3d") {
+      return "Explorar monumento 3D";
+    }
+    return "Explorar destino";
+  }
+
+  function paisPassaFiltro(pais) {
+    if (filtroAtivo !== "todos" && pais.continente !== filtroAtivo) {
+      return false;
+    }
+    if (!termoBusca) {
+      return true;
+    }
+    var texto =
+      (pais.nome + " " + pais.pontoTuristico + " " + pais.cidade).toLowerCase();
+    return texto.indexOf(termoBusca) >= 0;
+  }
+
   function preencherAlbum() {
     var grade = document.getElementById("grade-bandeiras");
+    if (!grade) {
+      return;
+    }
     grade.innerHTML = "";
 
-    window.DADOS_PAISES.forEach(function (pais) {
+    window.DADOS_PAISES.filter(paisPassaFiltro).forEach(function (pais, indice) {
       var card = document.createElement("button");
       card.type = "button";
-      card.className = "card-bandeira";
+      card.className = "card-destino";
+      card.style.animationDelay = Math.min(indice * 0.04, 0.4) + "s";
       card.setAttribute("aria-label", "Abrir " + pais.nome);
+      card.dataset.continente = pais.continente || "";
 
       card.innerHTML =
-        '<div class="moldura"><img src="' +
+        '<div class="card-destino-midia">' +
+        '<img src="' +
         pais.arquivoBandeira +
         '" alt="Bandeira de ' +
         pais.nome +
-        '" /></div>' +
+        '" loading="lazy" />' +
+        badgeDoPais(pais) +
+        "</div>" +
+        '<div class="card-destino-corpo">' +
         "<strong>" +
         pais.nome +
         "</strong>" +
-        "<small>" +
+        "<em>" +
         pais.pontoTuristico +
-        "</small>";
+        "</em>" +
+        (pais.etiqueta
+          ? '<span class="tag-destino">' + pais.etiqueta + "</span>"
+          : "") +
+        '<span class="card-destino-cta">' +
+        ctaDoPais(pais) +
+        "</span>" +
+        "</div>";
 
       card.addEventListener("click", function () {
         abrirDetalhe(pais);
@@ -66,6 +113,52 @@ window.IniciarAplicacao = (function () {
 
       grade.appendChild(card);
     });
+  }
+
+  function ligarFiltrosAlbum() {
+    var chips = document.querySelectorAll(".filtro-chip");
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        chips.forEach(function (c) {
+          c.classList.remove("ativo");
+        });
+        chip.classList.add("ativo");
+        filtroAtivo = chip.getAttribute("data-filtro") || "todos";
+        preencherAlbum();
+      });
+    });
+
+    var busca = document.getElementById("input-busca-album");
+    if (busca) {
+      busca.addEventListener("input", function () {
+        termoBusca = String(busca.value || "")
+          .trim()
+          .toLowerCase();
+        preencherAlbum();
+      });
+    }
+  }
+
+  function ligarNavegacaoLanding() {
+    var btnTopoCamera = document.getElementById("btn-ir-camera-topo");
+    if (btnTopoCamera) {
+      btnTopoCamera.addEventListener("click", function () {
+        window.ControlarNavegacao.irParaCamera();
+      });
+    }
+
+    var btnTopo = document.getElementById("btn-voltar-topo");
+    if (btnTopo) {
+      btnTopo.addEventListener("click", function () {
+        var topo = document.getElementById("topo");
+        if (topo) {
+          topo.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+    }
+
   }
 
   function ligarPainelDetalhe() {
@@ -97,6 +190,8 @@ window.IniciarAplicacao = (function () {
     window.ControlarNavegacao.ligarBotoes();
     window.MostrarCardPaisAr.ligarBotaoVisitar();
     ligarPainelDetalhe();
+    ligarFiltrosAlbum();
+    ligarNavegacaoLanding();
     preencherAlbum();
 
     window.ReconhecerBandeira.preparar()

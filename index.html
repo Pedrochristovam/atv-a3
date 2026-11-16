@@ -2,7 +2,8 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#05080d" />
     <title>Atlas AR — Bandeiras e Tours 360°</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,11 +12,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/estilos-interface.css" />
-    <!-- A-Frame: Realidade Virtual / cena 360° -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <!-- MindAR 1.2.5: image tracking (depois do A-Frame) -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <!-- OpenCV.js (C++/WebAssembly): reforço de visão computacional no reconhecimento -->
     <script>
       var Module = {
         onRuntimeInitialized: function () {
@@ -30,50 +28,125 @@
   <body>
     <div id="app">
       <section id="tela-inicio" class="tela tela-inicio">
-        <div class="hero">
-          <p class="selo">Realidade aumentada · turismo</p>
+        <header class="topo-site">
+          <a class="logo-site" href="#topo" id="link-logo">
+            Atlas <em>AR</em>
+          </a>
+          <button id="btn-ir-camera-topo" class="botao botao-cyan" type="button">
+            Escanear bandeira
+          </button>
+        </header>
+
+        <div class="hero-bloco" id="topo">
+          <p class="selo-cyan">Realidade aumentada espacial</p>
           <h1 class="marca">Atlas <em>AR</em></h1>
           <p class="subtitulo">
-            Identifique a bandeira de um país e viaje ao seu principal ponto
-            turístico em realidade virtual 360°.
+            Escaneie uma bandeira e entre no principal ponto turístico do país.
+            Doze destinos exclusivos para explorar em Realidade Aumentada.
           </p>
           <div class="acoes">
-            <button id="btn-ir-album" class="botao botao-principal" type="button">
+            <button id="btn-ir-album" class="botao botao-fantasma-escuro" type="button">
               Explorar álbum
             </button>
-            <button id="btn-ir-camera" class="botao botao-secundario" type="button">
-              Escanear bandeira (AR)
+            <button id="btn-ir-camera" class="botao botao-claro" type="button">
+              Escanear bandeira
             </button>
           </div>
-          <ol class="passos">
-            <li><span class="num">01</span> Escolha um país no álbum ou escaneie a bandeira.</li>
-            <li><span class="num">02</span> O painel 3D A-Frame aparece em Realidade Aumentada.</li>
-            <li><span class="num">03</span> Visite o destino em Realidade Virtual 360°.</li>
-          </ol>
+          <div class="faixa-stats" aria-label="Números do Atlas">
+            <div>
+              <strong>12</strong>
+              <span>Países catalogados</span>
+            </div>
+            <div>
+              <strong>100%</strong>
+              <span>Imersão 3D espacial</span>
+            </div>
+            <div>
+              <strong>4</strong>
+              <span>Continentes</span>
+            </div>
+          </div>
         </div>
+
+        <section class="secao-album" id="secao-album" aria-labelledby="titulo-album">
+          <div class="cabecalho-album">
+            <div>
+              <h2 id="titulo-album">Álbum de Destinos</h2>
+              <p>Nossos doze países — cada um com bandeira e experiência imersiva.</p>
+            </div>
+          </div>
+
+          <div class="barra-filtros">
+            <div class="filtros-continente" role="tablist" aria-label="Filtrar por continente">
+              <button type="button" class="filtro-chip ativo" data-filtro="todos">Todos</button>
+              <button type="button" class="filtro-chip" data-filtro="americas">Américas</button>
+              <button type="button" class="filtro-chip" data-filtro="europa">Europa</button>
+              <button type="button" class="filtro-chip" data-filtro="asia-africa">Ásia &amp; África</button>
+            </div>
+            <label class="busca-album">
+              <span class="oculto-visual">Buscar país</span>
+              <input
+                id="input-busca-album"
+                type="search"
+                placeholder="Buscar país ou monumento..."
+                autocomplete="off"
+              />
+            </label>
+          </div>
+
+          <div id="grade-bandeiras" class="grade-bandeiras"></div>
+        </section>
+
+        <section class="secao-passos" id="secao-experiencia">
+          <h2 id="secao-passos">Como viajar em segundos</h2>
+          <div class="grade-passos">
+            <article class="passo-card">
+              <span class="passo-num">01</span>
+              <h3>Aponte para a bandeira</h3>
+              <p>
+                Use a câmera do celular para reconhecer a bandeira do Brasil com
+                MindAR e abrir a experiência em Realidade Aumentada.
+              </p>
+            </article>
+            <article class="passo-card">
+              <span class="passo-num">02</span>
+              <h3>Renderização espacial</h3>
+              <p>
+                O monumento 3D emerge sobre a bandeira ou no tour — com iluminação
+                e navegação por arraste e giroscópio.
+              </p>
+            </article>
+            <article class="passo-card">
+              <span class="passo-num">03</span>
+              <h3>Visite o destino</h3>
+              <p>
+                Entre no ponto turístico: panorama, modelo 3D ou tour 360°, e
+                explore no seu ritmo.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <footer class="rodape-site" id="secao-sobre">
+          <div class="rodape-topo">
+            <p class="logo-site">Atlas <em>AR</em></p>
+            <button type="button" class="botao botao-fantasma-escuro" id="btn-voltar-topo">
+              Voltar ao topo
+            </button>
+          </div>
+          <p class="rodape-copy">
+            Atlas AR — experiências imersivas com bandeiras, AR e tours 3D no navegador.
+          </p>
+        </footer>
       </section>
 
-      <section id="tela-album" class="tela oculto">
-        <div class="cabecalho-tela">
-          <div>
-            <h2>Álbum de bandeiras</h2>
-            <p>Doze destinos. Escolha um país para abrir o tour.</p>
-          </div>
-          <button id="btn-album-voltar" class="botao botao-voltar" type="button">
-            Voltar
-          </button>
-        </div>
-        <div id="grade-bandeiras" class="grade-bandeiras"></div>
-      </section>
+      <!-- Mantido para compatibilidade de navegação; conteúdo unificado no início -->
+      <section id="tela-album" class="tela tela-album oculto" aria-hidden="true"></section>
 
       <section id="tela-camera" class="tela tela-camera oculto">
-        <!-- Camada legada (fluxo antigo IniciarCameraAr; oculta no modo MindAR) -->
         <video id="video-camera" class="video-camera" playsinline autoplay muted></video>
         <canvas id="canvas-analise" class="oculto" width="240" height="160"></canvas>
-
-        <!-- Cena AR: MindAR injeta tracking + objeto 3D ancorado -->
         <div id="container-cena-ar" class="container-cena-ar" aria-label="Cena de Realidade Aumentada MindAR"></div>
-
         <div class="mira mira-legado" aria-hidden="true"></div>
 
         <div class="barra-camera">
@@ -83,7 +156,6 @@
           <div id="status-deteccao" class="status-deteccao">Iniciando...</div>
         </div>
 
-        <!-- Painel HTML da experiência MindAR (Brasil) — toque confiável no celular -->
         <aside id="painel-ar-brasil" class="painel-ar-brasil oculto" aria-live="polite">
           <p class="painel-ar-pais">Brasil</p>
           <h2 class="painel-ar-titulo">Cristo Redentor</h2>
@@ -136,7 +208,6 @@
       </section>
     </div>
 
-    <!-- Painel de detalhe do álbum -->
     <div id="painel-detalhe" class="painel-detalhe oculto" role="dialog" aria-modal="true">
       <div class="painel-detalhe-conteudo">
         <div class="painel-detalhe-topo">
@@ -157,6 +228,9 @@
         </div>
       </div>
     </div>
+
+    <!-- botão oculto para manter listener do álbum-voltar -->
+    <button id="btn-album-voltar" class="oculto" type="button" tabindex="-1" aria-hidden="true">Voltar</button>
 
     <script src="js/dados-paises.js"></script>
     <script src="js/utilitarios-interface.js"></script>
